@@ -2,8 +2,6 @@ package nl.tdegroot.games.rain;
 
 import nl.tdegroot.games.pixxel.PixxelGame;
 import nl.tdegroot.games.pixxel.gfx.Screen;
-import nl.tdegroot.games.pixxel.gfx.Sprite;
-import nl.tdegroot.games.pixxel.util.Log;
 import nl.tdegroot.games.pixxel.util.Random;
 
 import java.util.ArrayList;
@@ -27,7 +25,7 @@ public class RainGame extends PixxelGame {
         spawnTimer -= delta;
         if (spawnTimer <= 0) {
             for (int i = 0; i < rainDropCount; i++) {
-                int x = Random.nextInt(0, window.width / window.scale);
+                int x = Random.nextInt(0, display.width / display.scale);
                 int y = -50;
                 double speed = Random.nextDouble();
                 int color = Random.nextInt(0xFF000055, 0xFF0000FF);
@@ -48,13 +46,13 @@ public class RainGame extends PixxelGame {
             }
             RainDrop drop = rainDrops.get(i);
             drop.tick(delta / 200);
-            if (drop.x >= window.width / window.scale || drop.y >= window.height / window.scale)
+            if (drop.x >= display.width / display.scale || drop.y >= display.height / display.scale)
                 drop.finished = true;
         }
     }
 
     public void render() {
-        Screen screen = window.screen;
+        Screen screen = display.screen;
         for(RainDrop drop : rainDrops) {
             drop.render(screen);
         }
